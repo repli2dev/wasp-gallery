@@ -63,6 +63,13 @@ ul.success {
 	margin-right: 15px;
 	margin-bottom: 15px;
 }
+.thumb a {
+	display: block;
+	text-align: center;
+}
+.thumb a:hover {
+	background: none;
+}
 .paginator {
 	margin-bottom: 10px;
 	font-size: 110%;
