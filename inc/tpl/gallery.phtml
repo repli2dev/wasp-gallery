@@ -1,0 +1,26 @@
+{extends @layout.phtml}
+
+{var pageTitle => $galleryName}
+
+{block #content}
+<h2>{$galleryName}</h2>
+{if $numberOfImages == 0}
+	<div class="error">{toLang "There are no images in this gallery. Please try another one."}</div>
+{else}
+	{!$galleryInfo}
+	<?php paginator($currentGallery,$numberOfImages,$page); ?>
+	<hr />
+	{foreach $images as $image}
+		{if $iterator->key() >= ($page*$perPage-$perPage) && $iterator->key() < ($page*$perPage)}
+			<div class="thumb">
+				<a href="/{$dir}/{$currentGallery}/{$image}" rel="galImg" title="{toLang "Image"}"><img src="/thumb/{$currentGallery}/{$image}" alt="{toLang "Thumb"}" /></a>
+			</div>
+			{if (($iterator->key()-$page*$perPage-$perPage)+1)%$perRow == 0}
+				<div class="clearImage">&nbsp;</div>
+			{/if}
+		{/if}
+	{/foreach}
+	<hr />
+	<?php paginator($currentGallery,$numberOfImages,$page); ?>
+{/if}
+{/block}

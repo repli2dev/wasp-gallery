@@ -1,0 +1,78 @@
+h1 {
+	color: #d16405;
+	width: 300px;
+	float: left;
+	height: 40px;
+}
+
+a {
+	color: #9fa92d;
+}
+
+a:visited {
+	color: #798218;
+}
+
+a:hover {
+	background: #d16505;
+	color: white;
+	text-decoration: none;
+}
+
+
+ul.menu {
+	list-style: none;
+	padding: 0px;
+}
+
+.menu a {
+	display: inline-block;
+	font-size: 130%;
+	text-decoration: none;
+	padding:2px;
+	padding-left: 10px;
+}
+.menu a {
+	display: block;
+}
+
+.menu a.highlight {
+	background: #d16505;
+	color: white;
+}
+
+#footer {
+	padding-top: 20px;
+	clear: both;
+}
+ul.error,
+ul.notice,
+ul.success {
+	list-style: none;
+}
+.count {
+	font-size: 100%;
+	color: black;
+}
+.thumb {
+	display: block;
+	float: left;
+	width: auto;
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+.paginator {
+	margin-bottom: 10px;
+	font-size: 110%;
+}
+.paginator a.highlight {
+	background: white;
+	font-weight: bold;
+}
+div.clearImage {
+	clear: both;
+	float: none;
+	width: 100%;
+	height: 1px;
+	line-height: 0px;
+}

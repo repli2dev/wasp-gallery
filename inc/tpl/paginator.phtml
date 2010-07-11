@@ -1,0 +1,6 @@
+<div class="paginator">
+{toLang "Pages"}:&nbsp;
+{for $i = 1; $i <= $pages; $i++}
+	<a {if $i == $currentPage}class="highlight"{/if} href="/gallery/{$currentGallery|url}/page/{$i}">[{$i}]</a>&nbsp;
+{/for}
+</div>
