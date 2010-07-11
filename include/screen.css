@@ -31,6 +31,8 @@ ul.menu {
 	text-decoration: none;
 	padding:2px;
 	padding-left: 10px;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .menu a {
 	display: block;
@@ -51,7 +53,7 @@ ul.success {
 	list-style: none;
 }
 .count {
-	font-size: 100%;
+	font-size: 85%;
 	color: black;
 }
 .thumb {

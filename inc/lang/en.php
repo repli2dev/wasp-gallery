@@ -16,5 +16,5 @@ $messages = array(
     "There are no images in this gallery. Please try another one." => "There are no images in this gallery. Please try another one.",
     "Image" => "Image",
     "Thumb" => "Thumb",
-    "Pages" => "Pages"
+    "Pages" => "Pages",
 );

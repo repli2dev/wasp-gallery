@@ -57,6 +57,7 @@ $filter->handler->macros['toLang'] = '<?php echo translate(%%); ?>';
 $template->registerHelper('escape', 'Nette\Templates\TemplateHelpers::escapeHtml');
 $template->registerHelper('escapeJs', 'Nette\Templates\TemplateHelpers::escapeJs');
 $template->registerHelper('escapeCss', 'Nette\Templates\TemplateHelpers::escapeCss');
+$template->registerHelper('truncate','Nette\String::truncate');
 $template->registerHelper('url', 'encodeUrl');
 
 // Content

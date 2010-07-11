@@ -55,7 +55,7 @@
 					{foreach $menu as $row}
 						{var $name => getGalleryName($row)}
 						{var $count => numberOfItems($row)}
-						<li><a {if $currentGallery == $row}class="highlight"{/if} href="/gallery/{$row|url}" title="{toLang "Open gallery"}">{$name} <span class="count">({$count})</span></a></li>
+						<li><a {if $currentGallery == $row}class="highlight"{/if} href="/gallery/{$row|url}" title="{toLang "Open gallery"} {$name} ({$count})">{$name|truncate:20} <span class="count">({$count})</span></a></li>
 					{/foreach}
 				</ul>
 			{else}
