@@ -16,5 +16,9 @@ $messages = array(
     "There are no images in this gallery. Please try another one." => "V této galerii se nenachází žádné obrázky, vyberte prosím jinou.",
     "Image" => "Obrázek",
     "Thumb" => "Náhled",
-    "Pages" => "Strany"
+    "Pages" => "Strany",
+    "Support for GD PHP module is missing, thumbs won't work." => "Chybí PHP GD modul, náhledové obrázky nebudou fungovat.",
+    "Protected gallery" => "Chráněná galerie",
+    "This gallery is protected and your password was wrong." => "Tato galerie je chráněná, vámi zadané heslo je špatné.",
+    "Log out" => "Odhlásit"
 );

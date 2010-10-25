@@ -16,5 +16,9 @@ $messages = array(
     "There are no images in this gallery. Please try another one." => "There are no images in this gallery. Please try another one.",
     "Image" => "Image",
     "Thumb" => "Thumb",
-    "Pages" => "Pages"
+    "Pages" => "Pages",
+    "Support for GD PHP module is missing, thumbs won't work." => "Support for GD PHP module is missing, thumbs won't work.",
+    "Protected gallery" => "Protected gallery",
+    "This gallery is protected and your password was wrong." => "This gallery is protected and your password was wrong.",
+    "Log out" => "Log out"
 );

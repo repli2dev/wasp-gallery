@@ -5,6 +5,7 @@
 
 	<meta name="description" content="{$web->description}">
 	<meta name="keywords" content="{$web->keywords}">
+	<meta name="author" content="{$web->author}">
 	<meta name="robots" content="{$web->robots}" n:ifset="$web->robots">
 
 	<title>{ifset $pageTitle}{$pageTitle} | {/if}{$web->defaultTitle}</title>
@@ -14,7 +15,7 @@
 	<!--[if IE]><link rel="stylesheet" href="/include/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
 
 	<link rel="stylesheet" media="screen,projection,tv" href="/include/screen.css" type="text/css">
-	<link media="screen" rel="stylesheet" href="/include/colorbox.css" />
+	<link media="screen" rel="stylesheet" href="/include/colorbox.css">
 	<script type="text/javascript" src="/include/jquery-min.js"></script>
 	<script type="text/javascript" src="/include/jquery.colorbox-min.js"></script>
 	<script type="text/javascript" n:syntax="off">
@@ -37,7 +38,7 @@
 			});
 		});
 	</script>
-	<style>
+	<style type="text/css">
 		.thumb a {
 			width: <?php echo Environment::getConfig("gallery")->width; ?>px;
 		}
@@ -46,9 +47,14 @@
 
 <body>
 	<div class="container">
-		<hr />
+		{if isSet($showGDWarning)}
+		<div class="error">
+			{toLang "Support for GD PHP module is missing, thumbs won't work."}
+		</div>
+		{/if}
+		<hr>
 			<h1>{$web->defaultTitle}</h1>
-		<hr />
+		<hr>
 
 		<hr class="space clear">
 
@@ -74,8 +80,11 @@
 		</div>
 		<div class="clear" id="footer">
 			{toLang "Powered by Wasp Gallery"} &copy; 2010 <a href="http://www.jandrabek.cz">Jan Drabek</a>
+			{if !empty($_SESSION)}
+			| <a href="/logout/">{toLang "Log out"}</a>
+			{/if}
 		</div>
-		<hr />
+		<hr>
 	</div>
 
 </body>

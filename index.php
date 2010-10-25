@@ -31,6 +31,9 @@ if(isSet($params[2]) && $params[2] == 'page' && isSet($params[3]) && is_numeric(
 	$page = 1;
 }
 
+// Init session
+session_start();
+
 // Load lang template
 $lang = Environment::getConfig("variable")->lang;
 if(file_exists("./inc/lang/".$lang.".php")){
@@ -41,6 +44,13 @@ if(file_exists("./inc/lang/".$lang.".php")){
 $dir = Environment::getConfig("gallery")->dir;
 $cache = Environment::getConfig("gallery")->cache;
 $timeout= Environment::getConfig("gallery")->timeout;
+
+// Content
+if(count($params) != 0 && $params[0] == "thumb" && !empty($params[1]) && !empty($params[2])){
+	// Thumbnailer
+	getThumb(decodeUrl($params[1]),$params[2]);
+	exit;
+}
 
 // Create template
 $template = new Template();
@@ -60,11 +70,39 @@ $template->registerHelper('escapeCss', 'Nette\Templates\TemplateHelpers::escapeC
 $template->registerHelper('truncate','Nette\String::truncate');
 $template->registerHelper('url', 'encodeUrl');
 
-// Content
-if(count($params) != 0 && $params[0] == "thumb" && !empty($params[1]) && !empty($params[2])){
-	getThumb(decodeUrl($params[1]),$params[2]);
-} else
+// If GD is not present show warning
+if(!function_exists("gd_info")) {
+	$template->showGDWarning = TRUE;
+}
+
+// Logout
+if(count($params != 0) && $params[0] == "logout") {
+	session_destroy();
+	header('WWW-Authenticate: Basic realm="'.translate("Protected gallery").'"');
+	header('HTTP/1.0 401 Unauthorized');
+	header("Location: /");
+}
+
+header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
+header("Pragma: no-cache");
+
+// Print gallery
 if(count($params) != 0 && $params[0] == "gallery" && !empty($params[1])) {
+	if(isGalleryProtected($params[1])) {
+		if(!isPrivilegedTo($params[1])) {
+			if(!isSet($_SERVER['PHP_AUTH_PW']) || $_SERVER['PHP_AUTH_PW'] != getGalleryPassword($params[1])) {
+				header('WWW-Authenticate: Basic realm="'.translate("Protected gallery").'"');
+				header('HTTP/1.0 401 Unauthorized');
+				$template->wrongPassword = TRUE;
+			} else {
+				if(isSet($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_PW'] == getGalleryPassword($params[1])) {
+					$_SESSION[$params[1]] = TRUE;
+				} else {
+					$template->wrongPassword = TRUE;
+				}
+			}
+		}
+	}
 	$template->setFile('./inc/tpl/gallery.phtml');
 	$template->currentGallery = $params[1];
 	$template->galleryName = getGalleryName($params[1]);
@@ -74,6 +112,7 @@ if(count($params) != 0 && $params[0] == "gallery" && !empty($params[1])) {
 	$template->perRow = Environment::getConfig('gallery')->perRow;
 	$template->images = getGalleryImages($params[1]);
 } else {
+	// Print default homepage
 	$template->setFile('./inc/tpl/index.phtml');
 	$template->currentGallery = NULL;
 }

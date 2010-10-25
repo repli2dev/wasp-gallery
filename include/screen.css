@@ -78,6 +78,9 @@ ul.success {
 	background: white;
 	font-weight: bold;
 }
+.paginator a:hover {
+	color: #d16505;
+}
 div.clearImage {
 	clear: both;
 	float: none;

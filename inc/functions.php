@@ -11,6 +11,7 @@ function getGalleries() {
 		}
 		closedir($handle);
 	}
+	usort($dirs, 'strcasecmp');
 	return $dirs;
 }
 
@@ -31,12 +32,13 @@ function getGalleryImages($gallery) {
 	$images = array();
 	if ($handle = opendir($dir.'/'.$gallery)) {
 		while (false !== ($file = readdir($handle))) {
-			if ($file != "." && $file != ".." && $file != "_name.txt" && $file != "_info.txt" && is_file($dir.'/'.$gallery.'/'.$file)) {
+			if ($file != "." && $file != ".." && $file != "_name.txt" && $file != "_info.txt" && $file != "_pass.txt" && is_file($dir.'/'.$gallery.'/'.$file)) {
 				$images[] = $file;
 			}
 		}
 		closedir($handle);
 	}
+	usort($images, 'strcasecmp');
 	return $images;
 }
 
@@ -110,4 +112,29 @@ function encodeUrl($s) {
 
 function decodeUrl($s){
 	return html_entity_decode(urldecode($s));
+}
+
+function isGalleryProtected($gallery) {
+	global $dir;
+	if(getGalleryPassword($gallery) != FALSE) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+function getGalleryPassword($gallery) {
+	global $dir;
+	if(file_exists($dir.'/'.$gallery.'/_pass.txt')) {
+		return trim(file_get_contents($dir.'/'.$gallery.'/_pass.txt'));
+	} else {
+		return FALSE;
+	}
+}
+
+function isPrivilegedTo($gallery) {
+	if(isSet($_SESSION[$gallery]) && $_SESSION[$gallery] == TRUE) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
 }
