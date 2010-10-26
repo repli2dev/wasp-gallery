@@ -20,5 +20,7 @@ $messages = array(
     "Support for GD PHP module is missing, thumbs won't work." => "Support for GD PHP module is missing, thumbs won't work.",
     "Protected gallery" => "Protected gallery",
     "This gallery is protected and your password was wrong." => "This gallery is protected and your password was wrong.",
-    "Log out" => "Log out"
+    "Log out" => "Log out",
+    "Password" => "Password",
+    "Log in" => "Log in"
 );

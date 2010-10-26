@@ -20,5 +20,7 @@ $messages = array(
     "Support for GD PHP module is missing, thumbs won't work." => "Chybí PHP GD modul, náhledové obrázky nebudou fungovat.",
     "Protected gallery" => "Chráněná galerie",
     "This gallery is protected and your password was wrong." => "Tato galerie je chráněná, vámi zadané heslo je špatné.",
-    "Log out" => "Odhlásit"
+    "Log out" => "Odhlásit",
+    "Password" => "Heslo",
+    "Log in" => "Přihlásit se"
 );

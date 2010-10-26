@@ -14,7 +14,7 @@
 		{foreach $images as $image}
 			{if $iterator->key() >= ($page*$perPage-$perPage) && $iterator->key() < ($page*$perPage)}
 				<div class="thumb">
-					<a href="/{$dir}/{$currentGallery}/{$image}" rel="galImg" title="{toLang "Image"}"><img src="/thumb/{$currentGallery}/{$image}" alt="{toLang "Thumb"}" /></a>
+					<a href="/full/{$dir}/{$currentGallery}/{$image}" rel="galImg" title="{toLang "Image"}"><img src="/thumb/{$currentGallery}/{$image}" alt="{toLang "Thumb"}" /></a>
 				</div>
 				{if (($iterator->key()-$page*$perPage-$perPage)+1)%$perRow == 0}
 					<div class="clearImage">&nbsp;</div>
@@ -26,5 +26,9 @@
 	{/if}
 {else}
 	<div class="error">{toLang "This gallery is protected and your password was wrong."}</div>
+	<form method="post">
+		<label for="password">{toLang "Password"}:</label>&nbsp;<input type="password" name="password" />
+		<input type="submit" name="submitted" value="{toLang "Log in"}" />
+	</form>
 {/if}
 {/block}

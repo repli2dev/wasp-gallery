@@ -46,9 +46,25 @@ $cache = Environment::getConfig("gallery")->cache;
 $timeout= Environment::getConfig("gallery")->timeout;
 
 // Content
+// Thumbnailer
 if(count($params) != 0 && $params[0] == "thumb" && !empty($params[1]) && !empty($params[2])){
-	// Thumbnailer
-	getThumb(decodeUrl($params[1]),$params[2]);
+	if(!isGalleryProtected($params[1]) || isPrivilegedTo($params[1])) {
+		getThumb(decodeUrl($params[1]),$params[2]);
+	} else {
+		header("Location: /gallery/".$params[1]."/");
+	}
+	exit;
+}
+
+// Full image (due permission check)
+if(count($params) != 0 && $params[0] == "full" && !empty($params[1]) && !empty($params[2]) && !empty($params[3])){
+	if(!isGalleryProtected($params[2]) || isPrivilegedTo($params[2])) {
+		if(!getFull(decodeUrl($params[2]),$params[3])) {
+			header("Location: /gallery/".$params[2]."/");
+		}
+	} else {
+		header("Location: /gallery/".$params[2]."/");
+	}
 	exit;
 }
 
@@ -78,24 +94,17 @@ if(!function_exists("gd_info")) {
 // Logout
 if(count($params != 0) && $params[0] == "logout") {
 	session_destroy();
-	header('WWW-Authenticate: Basic realm="'.translate("Protected gallery").'"');
-	header('HTTP/1.0 401 Unauthorized');
 	header("Location: /");
 }
-
-header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
-header("Pragma: no-cache");
 
 // Print gallery
 if(count($params) != 0 && $params[0] == "gallery" && !empty($params[1])) {
 	if(isGalleryProtected($params[1])) {
 		if(!isPrivilegedTo($params[1])) {
-			if(!isSet($_SERVER['PHP_AUTH_PW']) || $_SERVER['PHP_AUTH_PW'] != getGalleryPassword($params[1])) {
-				header('WWW-Authenticate: Basic realm="'.translate("Protected gallery").'"');
-				header('HTTP/1.0 401 Unauthorized');
+			if(!isSet($_POST['password']) || $_POST['password'] != getGalleryPassword($params[1])) {
 				$template->wrongPassword = TRUE;
 			} else {
-				if(isSet($_SERVER['PHP_AUTH_PW']) && $_SERVER['PHP_AUTH_PW'] == getGalleryPassword($params[1])) {
+				if(isSet($_POST['password']) && $_POST['password'] == getGalleryPassword($params[1])) {
 					$_SESSION[$params[1]] = TRUE;
 				} else {
 					$template->wrongPassword = TRUE;

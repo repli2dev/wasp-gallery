@@ -7,6 +7,7 @@ Just upload your photos and everything else is taken care of.
 
 TABLE OF CONTENTS of this README
 --------------------------------------------------------------------------------
+	0. Updating (changes)
 	1. Usage
 	2. Requirements
 	3. Installation
@@ -15,6 +16,25 @@ TABLE OF CONTENTS of this README
 	6. Licence
 	7. Contact
 
+
+0. UPDATING (CHANGES)
+--------------------------------------------------------------------------------
+	
+	Version 2:
+		Changes:
+			* Warning when GD is not available
+			* Css: hover fix on pagination
+			* Add meta tag
+			* HTML validity
+			* Performance issues
+			* Fix of sorting galleries and file names
+			* Passworded galleries
+		How to update
+			* Upload all files from new version 
+			  (beware not do delete your cache and galleries dir)
+			* Reset config.ini file!
+			* Test permissions (images not accessible by filename)
+		
 1. USAGE
 --------------------------------------------------------------------------------
 	1. Create folder (for safety use only alfanumeric characters)
@@ -24,7 +44,9 @@ TABLE OF CONTENTS of this README
 	   gallery name (otherwise only directory name would appear)
 	4. Opinionaly add to this dir _info.txt in which you can write (in HTML)
 	   description of the gallery, location where the photos were taken etc.
-	5. Browse your photos through browser
+	5. Opinionaly add to this dir _pass.txt in which you can write password
+	   to access this gallery. Please use only alphabet letters and numbers.
+	6. Browse your photos through browser
 
 2. Requirements
 --------------------------------------------------------------------------------
@@ -41,6 +63,8 @@ TABLE OF CONTENTS of this README
 	4. Test that inc/config.ini is not viewable through browser
 	5. Customize
 	6. Use!
+	7. !!!  If you want to use passworded galleries, please ensure, that galleries dir is not 
+		accessable through browser
 
 4. CUSTOMIZATION
 --------------------------------------------------------------------------------

@@ -70,7 +70,28 @@ function getThumb($gallery,$image) {
 		$thumb = Image::fromFile($cacheImage);
 	}
 	$thumb->send(Image::JPEG,90);
+}
 
+function getFull($gallery,$image) {
+	global $dir;
+	$fullImage = $dir.'/'.$gallery.'/'.$image;
+	header('Content-Type: '.mime_content_type($fullImage) );
+	if(file_exists($fullImage)){
+		$f = fopen($fullImage, 'rb');
+		if($f === FALSE) {
+			return FALSE;
+		}
+		while(!feof($f)) {
+			print fread($f,1024*1024);
+			// Needed for big files
+			ob_flush();
+			flush();
+		}
+		fclose($f);
+		return TRUE;
+	} else {
+		return FALSE;
+	}
 }
 
 function paginator($gallery,$count,$page) {
