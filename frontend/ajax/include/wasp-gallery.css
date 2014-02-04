@@ -1,0 +1,64 @@
+.wg-gallery {
+
+}
+
+.wg-galleries-list {
+	width: 20%;
+	float: left;
+}
+.wg-galleries-list.wg-hide {
+	display: none;
+}
+.wg-gallery-images {
+	width: 78%;
+	float: left;
+	border-left: 1px solid lightgray;
+}
+.wg-gallery-images.wg-full {
+	width: 100%;
+	border: 0px none;
+}
+
+.wg-galleries-list ul {
+	list-style: none;
+	padding: 0px;
+}
+.wg-galleries-list ul a {
+	display: inline-block;
+	font-size: 130%;
+	text-decoration: none;
+	padding:2px;
+	padding-left: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.wg-list-heading {
+	margin: 10px;
+}
+
+.wg-info-message,
+.wg-error-message,
+.wg-heading,
+.wg-description {
+	margin: 30px;
+}
+
+.wg-error-message,
+.wg-info-message {
+	padding: 10px;
+	border: 1px solid #f5f5f5;
+	background: #fdfdfd;
+}
+.wg-thumb {
+	display: block;
+	float: left;
+	width: auto;
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
+.wg-thumb a {
+	border: 0px none;
+}
+.wg-options {
+	margin: 10px;
+}

@@ -1,4 +1,5 @@
 cache/*
-inc/temp/*
+backend/inc/temp/*
+!backend/inc/temp/.htaccess
 galleries/*
 

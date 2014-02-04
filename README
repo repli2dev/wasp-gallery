@@ -1,40 +1,22 @@
 WASP GALLERY
 --------------------------------------------------------------------------------
-This small web application can handle creation of powerful gallery. Howerver it
+This small web application can handle creation of powerful gallery. However it
 still remains very simple to use and modify.
 
 Just upload your photos and everything else is taken care of.
 
 TABLE OF CONTENTS of this README
 --------------------------------------------------------------------------------
-	0. Updating (changes)
 	1. Usage
 	2. Requirements
-	3. Installation
-	4. Customization
-	5. Translation
-	6. Licence
-	7. Contact
+	3. Installation (backend)
+	4. Installation (fronend)
+	5. Customization
+	6. Translation
+	7. Licence
+	8. Contact
 
 
-0. UPDATING (CHANGES)
---------------------------------------------------------------------------------
-	
-	Version 2:
-		Changes:
-			* Warning when GD is not available
-			* Css: hover fix on pagination
-			* Add meta tag
-			* HTML validity
-			* Performance issues
-			* Fix of sorting galleries and file names
-			* Passworded galleries
-		How to update
-			* Upload all files from new version 
-			  (beware not do delete your cache and galleries dir)
-			* Reset config.ini file!
-			* Test permissions (images not accessible by filename)
-		
 1. USAGE
 --------------------------------------------------------------------------------
 	1. Create folder (for safety use only alfanumeric characters)
@@ -50,59 +32,61 @@ TABLE OF CONTENTS of this README
 
 2. Requirements
 --------------------------------------------------------------------------------
-	* Apache
-	* PHP >= 5.2
+	* PHP >= 5.3
 	* GD library (for creating thumbnails)
-	* mod_rewrite
 
-3. INSTALLATION
+3. INSTALLATION (BACKEND)
 --------------------------------------------------------------------------------
-	1. Copy all files (you can safely exclude README file) to your website
+	1. Copy all files from folder backend/ to proper place on server
 	2. Chmod dir cache/ to 777
 	3. Chmod dir inc/temp/ to 777
-	4. Test that inc/config.ini is not viewable through browser
+	4. Test that inc/config.neon is not viewable through browser
 	5. Customize
 	6. Use!
 	7. !!!  If you want to use passworded galleries, please ensure, that galleries dir is not 
 		accessable through browser
 
-4. CUSTOMIZATION
+4. INSTALLATION (FRONTEND)
+-------------------------------------------------------------------------------
+
+The frontend is new fully Javascript with AJAX quering. See example in frontent/ajax
+
+Available options for wasp-gallery object:
+
+apiPath: '',			// Path on webserver to api.php
+defaultGallery: '',		// Default gallery to load (default is no gallery)
+defaultLanguage: 'en',	// Language used in current frontend
+showGalleries: true, 	// Shows gallery list
+slideshowSpeed: 3500	// Time between image swaps
+
+
+
+5. CUSTOMIZATION
 --------------------------------------------------------------------------------
-	* In file inc/config.ini you can set interesing options:
-		- variable.lang = <LANG> ; languages are stored in inc/lang/
-		- web.defaultTitle = <TEXT> ; Title of page (h1, title)
-		- web.description = <TEXT> ; meta tag description
-		- web.keywords = <TEXT> ; meta tag keywords
-		- web.robots = <TEXT> ; info for robots
+	* In file inc/config.neon you can set interesting options:
 		- gallery.dir = "galleries" ; directory with galleries
 		- gallery.cache = "cache" ; directory with thumbnails
 		- gallery.width = 160 ; width of thumbnail in pixels
 		- gallery.height = 140 ; height of thumbnail in pixels
-		- gallery.perPage = 16	; thumbnails per page
-		- gallery.perRow = 4 ; thumbnails in row (710/4=160 + margin)
-		- gallery.timeout = 2500 ; timeout for slideshow in miliseconds
-	* HTML templates can be found in inc/tpl/ and use Templates from Nette
-	* CSS uses blueprint framework, which is edited in css/screen.js
 	* PHP code is mostly in index.php and inc/function.php and it use
 	  advantages of Nette framework (http://nette.org)
 	* Photo presentation uses colorbox and jquery
 	  http://colorpowered.com/colorbox/
 
 
-5. TRANSLATION
+6. TRANSLATION
 --------------------------------------------------------------------------------
 	Currently there are these translations:
 		* English
 		* Czech
 
 	However creating own is very simply:
-		1. Copy inc/lang/en.php to inc/lang/<YOUR-LANG>.php
+		1. Copy inc/lang/cs.php to inc/lang/<YOUR-LANG>.php
 		2. Translate all values from second column (do not touch keys!)
 		   e.g. "key" => "values",
-		3. In inc/config.ini set variable.lang = <YOUR-LANG>
-		4. Send it to me, so I can attach it to the next version ;-)
+		3. Send it to me, or make pull request on GitHub, so I can attach it to the next version ;-)
 
-6. LICENCE
+7. LICENCE
 --------------------------------------------------------------------------------
 	This application was written by Jan Drábek with handy usage of "cool"
 	frameworks.
@@ -137,8 +121,8 @@ TABLE OF CONTENTS of this README
 
 
 
-7. CONTACT
+8. CONTACT
 --------------------------------------------------------------------------------
-	If you encounter any problems do not hesitate to contact!
+	If you encounter any problems do not hesitate to contact me!
 
 	Mail address: me@jandrabek.cz
