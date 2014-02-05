@@ -278,9 +278,6 @@
 		}
 	}
 	WG.prototype.getGalleryHeading = function(gallery) {
-		if(typeof this.cacheGalleries || typeof this.cacheGalleries[gallery]['name'] == "undefined") {
-			return undefined;
-		}
 		return '<h2 class="' + this.cssSelectors.heading +'">' + this.getGalleryName(gallery) + '</h2>'
 	}
 	WG.prototype.restoreState = function() {

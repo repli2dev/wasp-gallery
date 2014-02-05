@@ -1,6 +1,6 @@
 <?php
 // Load Nette
-require_once(__DIR__ . '/inc/Nette.phar');
+require_once(__DIR__ . '/inc/nette.phar');
 require_once(__DIR__ . '/inc/functions.php');
 
 // Configure application

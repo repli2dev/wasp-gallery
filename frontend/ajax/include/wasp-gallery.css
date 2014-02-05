@@ -5,6 +5,7 @@
 .wg-galleries-list {
 	width: 20%;
 	float: left;
+	min-width: 200px;
 }
 .wg-galleries-list.wg-hide {
 	display: none;
@@ -31,6 +32,8 @@
 	padding-left: 10px;
 	overflow: hidden;
 	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 80%;
 }
 .wg-list-heading {
 	margin: 10px;
@@ -61,4 +64,8 @@
 }
 .wg-options {
 	margin: 10px;
+	line-height: 150%;
+}
+.wg-options a {
+	text-decoration: none;
 }

@@ -1,7 +1,7 @@
 <?php
 use Nette\Image;
 
-require_once(__DIR__ . '/Nette.phar');
+require_once(__DIR__ . '/nette.phar');
 
 function getError($type) {
 	return array(
@@ -25,21 +25,16 @@ function getGalleries($dir) {
 		return array();
 	}
 	$dirs = array();
-	if ($handle = opendir($dir)) {
-		while (false !== ($file = readdir($handle))) {
-			if ($file != "." && $file != ".." && is_dir($dir."/".$file)) {
-				$item = array();
-				// Try to get name and info
-				if(file_exists($dir.'/'.$file.'/_info.txt')) {
-					$item['info'] = file_get_contents($dir.'/'.$file.'/_info.txt');
-				}
-				if(file_exists($dir.'/'.$file.'/_name.txt')) {
-					$item['name'] = file_get_contents($dir.'/'.$file.'/_name.txt');
-				}
-				$dirs[$file] = $item;
-			}
+	foreach (\Nette\Utils\Finder::findDirectories('*')->in($dir) as $key => $file) {
+		$item = array();
+		// Try to get name and info
+		if(file_exists($key. '/_info.txt')) {
+			$item['info'] = file_get_contents($key.'/_info.txt');
 		}
-		closedir($handle);
+		if(file_exists($key.'/_name.txt')) {
+			$item['name'] = file_get_contents($key.'/_name.txt');
+		}
+		$dirs[$file->getBasename()] = $item;
 	}
 	uksort($dirs, 'strcasecmp');
 	return $dirs;
@@ -50,13 +45,8 @@ function getGalleryImages($path) {
 		return array();
 	}
 	$images = array();
-	if ($handle = opendir($path)) {
-		while (false !== ($file = readdir($handle))) {
-			if ($file != "." && $file != ".." && $file != "_name.txt" && $file != "_info.txt" && $file != "_pass.txt" && is_file($path . '/' . $file)) {
-				$images[] = $file;
-			}
-		}
-		closedir($handle);
+	foreach (\Nette\Utils\Finder::findFiles('*')->exclude('_name.txt','_info.txt', '_pass.txt', '.*')->in($path) as $key => $file) {
+		$images[] = $file->getBasename();
 	}
 	usort($images, 'strcasecmp');
 	return $images;
@@ -70,6 +60,9 @@ function isGalleryProtected($path) {
 	}
 }
 function getGalleryPassword($path) {
+	if(!file_exists($path) || !is_dir($path)) {
+		return FALSE;
+	}
 	if(file_exists($path.'/_pass.txt')) {
 		return trim(file_get_contents($path.'/_pass.txt'));
 	} else {
