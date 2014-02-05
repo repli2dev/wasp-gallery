@@ -61,6 +61,10 @@
 }
 .wg-thumb a {
 	border: 0px none;
+	display: block;
+	width: 160px;
+	height: 146px;
+	text-align: center;
 }
 .wg-options {
 	margin: 10px;

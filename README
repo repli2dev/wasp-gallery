@@ -57,6 +57,7 @@ apiPath: '',			// Path on webserver to api.php
 defaultGallery: '',		// Default gallery to load (default is no gallery)
 defaultLanguage: 'en',	// Language used in current frontend
 showGalleries: true, 	// Shows gallery list
+showGalleryHeading: true, // Shows gallery heading
 slideshowSpeed: 3500	// Time between image swaps
 
 

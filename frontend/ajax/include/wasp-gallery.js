@@ -20,6 +20,7 @@
 		defaultGallery: '',
 		defaultLanguage: 'en',
 		showGalleries: true,
+		showGalleryHeading: true,
 		slideshowSpeed: 3500
 	}
 	WG.languageStrings = {}
@@ -253,7 +254,9 @@
 		}
 		object.empty();
 		// Gallery info
-		object.append('<h2 class="' + this.cssSelectors.heading +'">' + this.getGalleryName(this.currentGallery) + '</h2>');
+		if(this.settings.showGalleryHeading) {
+			object.append('<h2 class="' + this.cssSelectors.heading +'">' + this.getGalleryName(this.currentGallery) + '</h2>');
+		}
 		object.append('<div class="' + this.cssSelectors.description +'">' + this.getGalleryDescription(this.currentGallery) + '</div>');
 		// The images
 		for(var i = 0; i < this.cacheImages.length; i++) {
