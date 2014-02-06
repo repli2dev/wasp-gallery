@@ -1,3 +1,7 @@
+/**
+ * Wasp Gallery
+ * Simple lightweight gallery for showing all pictures in given folder.
+ */
 (function (jQuery) {
 	// Extend jQuery to provide method for creating a new gallery
 	jQuery.fn.waspGallery = function(settings) {
@@ -7,7 +11,8 @@
 		}
 		new WG('#' + this[0].id, settings);
 	};
-	// Gallery object (instance for gallery instance)
+
+	// Gallery object (object instance for gallery instance)
 	function WG(object, settings) {
 		// Merge settings and add object reference
 		jQuery.extend(this.settings, settings);
@@ -16,12 +21,12 @@
 		this.init();
 	}
 	WG.prototype.settings = {
-		apiPath: '',
-		defaultGallery: '',
-		defaultLanguage: 'en',
-		showGalleries: true,
-		showGalleryHeading: true,
-		slideshowSpeed: 3500
+		apiPath: '',				// Path to api.php file
+		defaultGallery: '',			// Default gallery to show
+		defaultLanguage: 'en',		// Default language to be used
+		showGalleries: true,		// Toogle whether show gallery
+		showGalleryHeading: true,	// Toogle whether show gallery heading when showing gallery
+		slideshowSpeed: 3500		// Time between pictures in slideshow mode
 	}
 	WG.languageStrings = {}
 	WG.prototype.cssSelectors = {
@@ -36,14 +41,19 @@
 		thumbReal: 'wg-thumb-real',
 		options: 'wg-options',
 		hide: 'wg-hide',
-		full: 'wg-full'
+		full: 'wg-full',
+		ajaxPending: 'wg-ajax-pending'
 	}
-
-	WG.prototype.selector = null;
+	WG.prototype.selector = null;	// CSS ID of <div> associated with this gallery instance
 	WG.prototype.cacheGalleries = null;
 	WG.prototype.cacheImages = null;
 	WG.prototype.currentGallery = null;
+	/**
+	 * Inits
+	 */
 	WG.prototype.init = function() {
+		// Init AJAX notification
+		this.initAjaxNotification();
 		// Create basic layout
 		this.prepareLayout();
 		// Load language
@@ -57,6 +67,18 @@
 			// Restore state (if any)
 			this.restoreState();
 		}
+	}
+	WG.prototype.initAjaxNotification = function() {
+		var that = this;
+		$(document).ajaxStart(function() {
+			if ($(that.selector + ' .' + that.cssSelectors.ajaxPending).length == 0){
+				var object = $(that.selector);
+				object.prepend('<div class="' + that.cssSelectors.ajaxPending + '">' + that.translate('Gallery is loading. Please wait.') +'</div>');
+			}
+		});
+		$(document).ajaxStop(function() {
+			$(that.selector + ' .' + that.cssSelectors.ajaxPending).remove();
+		});
 	}
 	WG.prototype.initColorbox = function(slideshow) {
 		var colorboxSettings = {
@@ -301,6 +323,7 @@
 		var that = this;
 		$.ajax({
 			url: this.settings.apiPath + '?request=language&language=' + that.settings.defaultLanguage,
+			async: false,
 			success: function(data) {
 				if(typeof data === 'string') {
 					try {

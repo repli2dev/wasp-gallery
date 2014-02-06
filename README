@@ -10,7 +10,7 @@ TABLE OF CONTENTS of this README
 	1. Usage
 	2. Requirements
 	3. Installation (backend)
-	4. Installation (fronend)
+	4. Installation (frontend)
 	5. Customization
 	6. Translation
 	7. Licence
@@ -45,6 +45,7 @@ TABLE OF CONTENTS of this README
 	6. Use!
 	7. !!!  If you want to use passworded galleries, please ensure, that galleries dir is not 
 		accessable through browser
+	8. Check that galleries and cache are accessible for PHP (permissions etc).
 
 4. INSTALLATION (FRONTEND)
 -------------------------------------------------------------------------------

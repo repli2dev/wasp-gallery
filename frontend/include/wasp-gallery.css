@@ -1,5 +1,5 @@
 .wg-gallery {
-
+	position: relative;
 }
 
 .wg-galleries-list {
@@ -72,4 +72,10 @@
 }
 .wg-options a {
 	text-decoration: none;
+}
+.wg-ajax-pending {
+	position: absolute;
+	background: rgba(245, 245, 245, 0.75);
+	width: 100%;
+	padding: 10px;
 }

@@ -42,7 +42,8 @@ if($request == 'language') {
 
 // Get all galleries
 if($request == 'galleries'){
-	$path = __DIR__ . '/../' . $gallerySettings['dir'];
+	sleep(2);
+	$path = __DIR__ . '/' . $gallerySettings['dir'];
 	exitWithJSON(getGalleries($path));
 }
 
@@ -53,7 +54,7 @@ if($request == 'images'){
 	if(empty($gallery)) {
 		exitWithJSON(getError(2));
 	}
-	$path = __DIR__ . '/../' . $gallerySettings['dir'] . '/' . $gallery;
+	$path = __DIR__ . '/' . $gallerySettings['dir'] . '/' . $gallery;
 	if(isGalleryProtected($path) && !isPrivilegedTo($path)) {
 		exitWithJSON(getError(3));
 	} else {
@@ -70,7 +71,7 @@ if($request == 'authorize') {
 	if(empty($gallery) || empty($password)) {
 		exitWithJSON(getError(4));
 	}
-	$path = __DIR__ . '/../' . $gallerySettings['dir'] . '/' . $gallery;
+	$path = __DIR__ . '/' . $gallerySettings['dir'] . '/' . $gallery;
 	if($password == getGalleryPassword($path)) {
 		privilegeTo($path);
 		exitWithJSON(array('success'));
@@ -90,12 +91,12 @@ if($request == 'full') {
 	$gallery = sanitizeInput($gallery);
 	$image = $httpRequest->getQuery('image');
 	$image = sanitizeInput($image);
-	$path = __DIR__ . '/../' . $gallerySettings['dir'] . '/' . $gallery;
+	$path = __DIR__ . '/' . $gallerySettings['dir'] . '/' . $gallery;
 	if(empty($image) || empty($gallery)) {
 		exitWithJSON(getError(6));
 	}
 	if(!isGalleryProtected($path) || isPrivilegedTo($path)) {
-		if(!getFull($gallery, $image, __DIR__ . '/../' . $gallerySettings['dir'])) {
+		if(!getFull($gallery, $image, __DIR__ . '/' . $gallerySettings['dir'])) {
 			header('HTTP/1.1 403 Forbidden');
 		}
 	} else {
@@ -110,7 +111,7 @@ if($request == 'thumb') {
 	$gallery = sanitizeInput($gallery);
 	$image = $httpRequest->getQuery('image');
 	$image = sanitizeInput($image);
-	$path = __DIR__ . '/../' . $gallerySettings['dir'] . '/' . $gallery;
+	$path = __DIR__ . '/' . $gallerySettings['dir'] . '/' . $gallery;
 	if(empty($image) || empty($gallery)) {
 		exitWithJSON(getError(6));
 	}
@@ -118,8 +119,8 @@ if($request == 'thumb') {
 		getThumb(
 			$gallery,
 			$image,
-			__DIR__ . '/../' . $gallerySettings['dir'],
-			__DIR__ . '/../' . $gallerySettings['cache'],
+			__DIR__ . '/' . $gallerySettings['dir'],
+			__DIR__ . '/' . $gallerySettings['cache'],
 			$gallerySettings['width'],
 			$gallerySettings['height']);
 	} else {

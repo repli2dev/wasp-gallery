@@ -6,8 +6,8 @@ php:
 	date.timezone: Europe/Prague
 
 parameters:
-	gallery:
-		dir: galleries
-		cache: cache
+	gallery:	# Paths are relative from api.php file
+		dir: ../galleries
+		cache: ../cache
 		width: 160
 		height: 140

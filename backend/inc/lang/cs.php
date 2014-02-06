@@ -16,5 +16,6 @@ $messages = array(
 	"No galleries." => "Žádné galerie.",
 	"Error when obtaining gallery images. Please contact administrator of this webpage." => "Nastala chyba při načítání obrázků galerie. Kontaktujte, prosím, administrátora této stránky.",
 	"No images in this gallery." => "V této galerii nejsou žádné obrázky.",
+	"Gallery is loading. Please wait." => "Galerie se právě načítá. Vyčkejte prosím."
 
 );
