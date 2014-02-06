@@ -289,7 +289,7 @@
 		this.saveState();
 	}
 	WG.prototype.getGalleryName = function(gallery) {
-		if(typeof this.cacheGalleries[gallery]['name'] == "undefined") {
+		if(typeof this.cacheGalleries[gallery] == "undefined" || typeof this.cacheGalleries[gallery]['name'] == "undefined") {
 			return gallery;
 		} else {
 			return this.cacheGalleries[gallery]['name'];
