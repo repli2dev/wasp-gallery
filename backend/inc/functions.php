@@ -1,5 +1,7 @@
 <?php
 use Nette\Image;
+use Nette\Utils\Finder;
+use Nette\Utils\Json;
 
 require_once(__DIR__ . '/nette.phar');
 
@@ -11,7 +13,7 @@ function getError($type) {
 
 function exitWithJSON($output) {
 	header('Content-type: application/json; charset=utf-8');
-	echo \Nette\Utils\Json::encode($output);
+	echo Json::encode($output);
 	exit;
 }
 
@@ -25,7 +27,7 @@ function getGalleries($dir) {
 		return array();
 	}
 	$dirs = array();
-	foreach (\Nette\Utils\Finder::findDirectories('*')->in($dir) as $key => $file) {
+	foreach (Finder::findDirectories('*')->in($dir) as $key => $file) {
 		$item = array();
 		// Try to get name and info
 		if(file_exists($key. '/_info.txt')) {
@@ -45,7 +47,7 @@ function getGalleryImages($path) {
 		return array();
 	}
 	$images = array();
-	foreach (\Nette\Utils\Finder::findFiles('*')->exclude('_name.txt','_info.txt', '_pass.txt', '.*')->in($path) as $key => $file) {
+	foreach (Finder::findFiles('*')->exclude('_name.txt','_info.txt', '_pass.txt', '.*')->in($path) as $key => $file) {
 		$images[] = $file->getBasename();
 	}
 	usort($images, 'strcasecmp');
